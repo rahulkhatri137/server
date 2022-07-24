@@ -17,3 +17,23 @@ jobs:
     - run: curl -sL https://git.io/file-transfer | sh
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@master
+
+    - name: Upload File
+      run: |
+         sudo apt install expect aria2 -y
+         cd final
+         echo "Uploading your file. wait... it can take some seconds/minutes"
+         ls
+         expect -c " 
+         spawn sftp ${{ secrets.SFUSER }}@frs.sourceforge.net
+         expect \"Password\"        
+         send \"${{ secrets.SFPASS }}\r\"
+         expect \"sftp> \"
+         send \"cd ${{ secrets.SFDIR }}\r\"
+         set timeout -1
+         send \"put *\r\"
+         expect \"Uploading\"
+         expect \"100%\"
+         expect \"sftp>\"
+         send \"bye\r\"
+         interact"
