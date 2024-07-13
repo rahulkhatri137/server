@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: sudo apt update && sudo apt install git ffmpeg; git clone https://${{ secrets.TOKEN }}@github.com/rahulkhatri137/vcomp comp; cd comp; pip3 install --no-cache-dir -r requirements.txt; sudo chmod -R 777 .; sudo ./convertor.sh
+    - run: sudo apt update && sudo apt install git ffmpeg; git clone https://${{ secrets.TOKEN }}@github.com/rahulkhatri137/vcomp comp; cd comp; pip3 install --no-cache-dir -r requirements.txt; sudo chmod -R 777 .; ./convertor.sh
