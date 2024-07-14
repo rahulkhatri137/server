@@ -13,7 +13,20 @@ jobs:
       with:
         ssh_key: ${{ secrets.SSH_KEY }}
         key_file: id_ecdsa
-    - uses: actions/checkout@v2
-    - run: curl -sL https://git.io/file-transfer | sh
+    - uses: actions/checkout@v4
+
+    - name: Setup JDK
+      uses: actions/setup-java@v3
+      with:
+          java-version: '17'
+          distribution: 'zulu'
+          cache: gradle
+
+    - name: Setup Android SDK
+      uses: amyu/setup-android@v4
+      with:
+          cache-disabled: true
+          sdk-version: '33'
+          build-tools-version: '33.0.2'
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@master
